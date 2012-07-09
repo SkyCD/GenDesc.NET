@@ -1,0 +1,157 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{0947546A-183A-4748-B54C-2DA618A83EF3}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>WinExe</OutputType>
+    <MyType>WindowsForms</MyType>
+    <RootNamespace>GenDesc</RootNamespace>
+    <AssemblyName>GenDescTV</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Administrator\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <OptionCompare>Binary</OptionCompare>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <DefineConstants>DEBUG=1,TRACE=1</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <DefineConstants>TRACE=1</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.Targets" />
+  <ItemGroup>
+    <Reference Include="Jayrock">
+      <HintPath>Jayrock.dll</HintPath>
+    </Reference>
+    <Reference Include="Jayrock.Json">
+      <HintPath>Jayrock.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WizardBase">
+      <HintPath>WizardBase.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+    <Compile Include="Expansible\Delegates.vb" />
+    <Compile Include="Expansible\iImportClass.vb" />
+    <Compile Include="Expansible\ProcessSystem.vb" />
+    <Compile Include="Export\ImageShackUploader.vb" />
+    <Compile Include="Forms\About.Designer.vb">
+      <DependentUpon>About.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\About.vb" />
+    <Compile Include="Forms\Config.Designer.vb">
+      <DependentUpon>Config.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Config.vb" />
+    <Compile Include="Forms\MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.vb" />
+    <Compile Include="Forms\ProgressBar.Designer.vb">
+      <DependentUpon>ProgressBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProgressBar.vb" />
+    <Compile Include="Forms\SheetFillWizard.Designer.vb">
+      <DependentUpon>SheetFillWizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SheetFillWizard.vb" />
+    <Compile Include="Import\Base.vb" />
+    <Compile Include="Import\FromAnimeNewsNetworkURL.vb" />
+    <Compile Include="Import\FromIMDBURL.vb" />
+    <Compile Include="Import\FromTVcomURL.vb" />
+    <Compile Include="Import\FromWikipediaURL.vb" />
+    <Compile Include="Import\FromAniDBURL.vb" />
+    <Compile Include="Library\ArraysSmart.vb" />
+    <Compile Include="Library\BBCode.vb" />
+    <Compile Include="Library\Console.vb" />
+    <Compile Include="Library\Convert.vb" />
+    <Compile Include="Library\Globalization.vb" />
+    <Compile Include="Library\TemplateMashine.vb" />
+    <Compile Include="Library\TextFunctions.vb" />
+    <Compile Include="Objects\ObjDataItem.vb" />
+    <Compile Include="Objects\Settings.vb" />
+    <Compile Include="Objects\WebBrowserContentDonwloader.vb" />
+    <Compile Include="Program.vb" />
+    <Compile Include="Properties\AssemblyInfo.vb" />
+    <Compile Include="VideoTools\FFMPEG.CommandLine.vb" />
+    <Compile Include="VideoTools\FFMPEG.Tools.vb" />
+    <Compile Include="VideoTools\Info.MediaInfo.vb" />
+    <Compile Include="VideoTools\Info.StreamInfo.Attachment.vb" />
+    <Compile Include="VideoTools\Info.StreamInfo.Audio.vb" />
+    <Compile Include="VideoTools\Info.StreamInfo.Base.vb" />
+    <Compile Include="VideoTools\Info.StreamInfo.Subtitle.vb" />
+    <Compile Include="VideoTools\Info.StreamInfo.Video.vb" />
+    <Compile Include="VideoTools\Info.StreamsCollection.vb" />
+    <EmbeddedResource Include="Forms\About.resx">
+      <DependentUpon>About.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Config.resx">
+      <DependentUpon>Config.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgressBar.resx">
+      <DependentUpon>ProgressBar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SheetFillWizard.resx">
+      <DependentUpon>SheetFillWizard.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Scripts\TemplateThings.inc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="settings.dat">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\%40Default %28english%29.tpl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Templates\LinkoManija.Net %28lithuanian%29.tpl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Tools\ffmpeg\ffmpeg.exe" />
+    <Folder Include="Import" />
+    <Folder Include="Expansible" />
+    <Folder Include="Library" />
+    <Folder Include="Export" />
+    <Folder Include="Forms" />
+    <Folder Include="VideoTools" />
+    <Folder Include="Tools" />
+    <Folder Include="Scripts" />
+    <Folder Include="Objects" />
+    <Folder Include="Templates" />
+    <Folder Include="Tools\ffmpeg" />
+  </ItemGroup>
+</Project>
