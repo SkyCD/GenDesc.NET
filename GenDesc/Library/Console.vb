@@ -51,10 +51,9 @@ Namespace Library
             	Throw ex
         	End Try
     	End Sub
-    	
-    	Public Shared Function RunApplicationSE(ByVal _Path As String, Optional ByVal _Args As String = "") As String
-    		Dim Rez As New IO.StringWriter()
-            Dim nprocess As Process =  New Process()             
+
+        Public Shared Function RunApplicationSE(ByVal _Path As String, Optional ByVal _Args As String = "") As String
+            Dim nprocess As Process = New Process()
             nprocess.StartInfo.FileName = _Path
             nprocess.StartInfo.Arguments = _Args
             nprocess.EnableRaisingEvents = False
@@ -63,18 +62,12 @@ Namespace Library
             nprocess.StartInfo.RedirectStandardOutput = True
             nprocess.StartInfo.RedirectStandardError = True
             nprocess.Start()
-            Dim d As IO.StreamReader = nprocess.StandardError            
-            Do 
-            	Rez.WriteLine(d.ReadLine())
-            	If System.DateTime.Now.Ticks Mod 2 = 0 Then
-					Application.DoEvents()					
-            	End If            	
-            Loop While Not d.EndOfStream
-            nprocess.WaitForExit()
+            nprocess.WaitForExit(12000)
+            Dim rez As String = nprocess.StandardError.ReadToEnd() + vbCrLf + vbCrLf + nprocess.StandardOutput.ReadToEnd() + vbCrLf
             nprocess.Close()
-            Return rez.ToString()            
-		End Function
-	
-	End Class
+            Return rez.ToString()
+        End Function
+
+    End Class
 
 End Namespace

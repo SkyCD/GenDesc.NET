@@ -275,17 +275,21 @@ Namespace Import
 		Private Sub wkLanguageFlagsWikiReplace()
 			Me.Actions.Text = "Replacing language flags..."			
 			Dim cultures() As CultureInfo = CultureInfo.GetCultures(CultureTypes.AllCultures And Not CultureTypes.NeutralCultures)
-			For Each culture As CultureInfo In cultures
-				Dim Region As New RegionInfo(culture.LCID)				
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.Name + "}}", Region.EnglishName)
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.DisplayName + "}}", Region.EnglishName)
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.NativeName + "}}", Region.EnglishName)
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.ThreeLetterWindowsRegionName.Substring(0, 2) + "}}", Region.EnglishName)
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.ThreeLetterWindowsRegionName + "}}", Region.EnglishName)
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.ThreeLetterISORegionName + "}}", Region.EnglishName)
-				Me.WikipediaContent = Me.WikipediaContent.replace("{{" + Region.TwoLetterISORegionName + "}}", Region.EnglishName)
-			Next
-		End Sub
+            For Each culture As CultureInfo In cultures
+                Try
+                    Dim Region As New RegionInfo(culture.LCID)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.Name + "}}", Region.EnglishName)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.DisplayName + "}}", Region.EnglishName)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.NativeName + "}}", Region.EnglishName)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.ThreeLetterWindowsRegionName.Substring(0, 2) + "}}", Region.EnglishName)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.ThreeLetterWindowsRegionName + "}}", Region.EnglishName)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.ThreeLetterISORegionName + "}}", Region.EnglishName)
+                    Me.WikipediaContent = Me.WikipediaContent.Replace("{{" + Region.TwoLetterISORegionName + "}}", Region.EnglishName)
+                Catch ex As Exception
+
+                End Try
+            Next
+        End Sub
 		
 		Public Sub AddTodo_ExtractInfobox()
 			Me.Actions.Add(AddressOf Me.wkInfoboxWikiExtract)

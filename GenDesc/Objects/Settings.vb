@@ -39,12 +39,15 @@ Namespace My
 		
 		Private Sub LoadSettings() 						
 			Settings = New Jayrock.Json.JsonObject()
-			If IO.File.Exists(SettingsFile) Then
-				Dim tr as IO.TextReader = New IO.StringReader(IO.File.ReadAllText(SettingsFile))
-				Dim jp As New Jayrock.Json.JsonTextReader(tr)			
-				Settings.Import(jp)				
-			End If			
-		End Sub
+            If IO.File.Exists(SettingsFile) Then
+                Dim content As String = IO.File.ReadAllText(SettingsFile)
+                If content.Length > 0 Then
+                    Dim tr As IO.TextReader = New IO.StringReader(content)
+                    Dim jp As New Jayrock.Json.JsonTextReader(tr)
+                    Settings.Import(jp)
+                End If
+            End If
+        End Sub
 		
 		Public Property FFMPEG As String
 			Get

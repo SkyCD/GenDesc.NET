@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 ' change them to the information which is associated with the assembly
 ' you compile.
 
-<assembly: AssemblyTitle("GenDesc")>
-<assembly: AssemblyDescription("Description Generator For Series")>
+<Assembly: AssemblyTitle("GenDesc.NET")>
+<Assembly: AssemblyDescription("Description Generator")>
 '<assembly: AssemblyConfiguration("")>
 '<assembly: AssemblyCompany("MekDrop <mekdrop@gmail.com>")>
-<assembly: AssemblyProduct("GenDescTV")>
-<assembly: AssemblyCopyright("2009")>
+<Assembly: AssemblyProduct("GenDesc.NET")>
+<Assembly: AssemblyCopyright("2009-2016")>
 '<assembly: AssemblyTrademark("")>
 '<assembly: AssemblyCulture("")>
 
@@ -28,4 +28,4 @@ Imports System.Runtime.InteropServices
 ' You can specify all values by your own or you can build default build and revision
 ' numbers with the '*' character (the default):
 
-<assembly: AssemblyVersion("0.1.*")>
+<Assembly: AssemblyVersion("0.2")>

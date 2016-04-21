@@ -60,111 +60,111 @@ Public Partial Class MainForm
 		Return sce.Generate(data)
 	End Function
 	
-	Private isLoading As Boolean = True	
-					
-	Sub MainFormLoad(sender As Object, e As EventArgs)
-		Dim Path As String = IO.Directory.GetParent(Application.ExecutablePath).FullName + "\Templates"
-		Dim files() As String = IO.Directory.GetFiles(Path, "*.tpl")		
-		Dim finfo As IO.FileInfo
-		For Each item As String In files
-			finfo = New IO.FileInfo(item)
-			Dim tplName As String = finfo.Name.Substring(0, finfo.Name.Length - finfo.Extension.Length )			
-			Dim I As Integer = Me.tscbGeneratedTextLanguage.Items.Add(tplName)			
-			If tplName = My.Settings.SelectedTemplateEngine Then				
-				Me.tscbGeneratedTextLanguage.SelectedIndex = I
-			End If
-		Next
-		If Me.tscbGeneratedTextLanguage.SelectedIndex < 0 Then
-			Me.tscbGeneratedTextLanguage.SelectedIndex = 0
-		End If
-		isLoading = False		
-	End Sub	
-	
-	Sub TscbGeneratedTextLanguageTextChanged(sender As Object, e As EventArgs)
-		Call TabControl1SelectedIndexChanged(sender, e)
-	End Sub
-	
-	Sub ToolStripButton3Click(sender As Object, e As EventArgs)
-		Me.objDataItem.Clear()
-		Me.propertyGrid1.Update()
-		Me.propertyGrid1.Refresh()		
-	End Sub	
+	Private isLoading As Boolean = True
 
-	Public Sub RegenerateContent()
-		Me.PBar.ToDo.Text = "Regenerating content..."		
-		Me.textBox1.Text = ""
-		Me.textBox1.Text = ParseTemplate(  IO.Directory.GetParent(Application.ExecutablePath).FullName + "\Templates\" + Me.tscbGeneratedTextLanguage.Text + ".tpl")
-		My.Settings.SelectedTemplateEngine = Me.tscbGeneratedTextLanguage.Text		
-	End Sub
-	
-	Public ReadOnly Property GeneratedContent() As String
-		Get
-			Return Me.textBox1.Text
-		End Get
-	End Property
-	
-	Sub TabControl1SelectedIndexChanged(sender As Object, e As EventArgs)
-		If Me.TabControl1.SelectedIndex = 1 Then
-			Me.PBar.todo.Add(New Expansible.Delegates.TodoAction(AddressOf Me.RegenerateContent))			
-			Me.PBar.todo.Start()
-			'Me.RegenerateContent()
-		End If		
-		Me.toolStripButton3.Enabled = (Me.TabControl1.SelectedIndex = 0)		
-	End Sub
-		
-	Sub ToolStripButton2Click(sender As Object, e As EventArgs)
-		If Me.objDataItem.WikipediaProfileLink Is Nothing Then
-			MessageBox.Show("You must specify Wikipedia profile url first!")
-			Exit Sub
-		End If
-		
-		With Me.PBar.ToDo						
-			.AddAllActions(New Import.FromWikipediaURL())
-			.AddAllActions(New Import.FromAniDBURL())
-			.AddAllActions(New Import.FromAnimeNewsNetworkURL())
-			.AddAllActions(New Import.FromIMDBURL())
-			.AddAllActions(New Import.FromTVcomURL())			
-		End With
-		
-		Me.PBar.ToDo.Start()				
-	End Sub
-			
-	Sub ToolStripButton4Click(sender As Object, e As EventArgs)
-		If Not Me.TabControl1.SelectedIndex = 1 Then
-			Me.TabControl1.SelectedIndex = 1
-		End If
-		Clipboard.SetText(Me.textBox1.Text)		
-	End Sub	
-		
-	Sub ToolStripButton1Click(sender As Object, e As EventArgs)
-		SheetFillWizard.Instance.Show()		
-	End Sub
-		
-	Sub ToolStripButton5Click(sender As Object, e As EventArgs)
-		Dim ab As New About()
-		ab.ShowDialog()		
-	End Sub	
-	
-	Sub ToolStripButton6Click(sender As Object, e As EventArgs)
-		Dim cf As New Config(Me)		
-		cf.ShowDialog()
-	End Sub
-		
-	Sub MainFormActivated(sender As Object, e As EventArgs)
-		If Me.PBar.Visible Then
-			Me.PBar.Focus()
-			Exit Sub			
-		End If
-		If SheetFillWizard.Instance.Visible Then
-			SheetFillWizard.Instance.Focus()
-			Exit Sub
-		End If
-	End Sub
-		
-	Sub TscbGeneratedTextLanguageSelectedIndexChanged(sender As Object, e As EventArgs)
-		If isLoading Then Exit Sub		
-		Me.PBar.todo.Add(New Expansible.Delegates.TodoAction(AddressOf Me.RegenerateContent))			
-		Me.PBar.todo.Start()
-	End Sub
-	
+    Sub MainFormLoad(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim Path As String = IO.Directory.GetParent(Application.ExecutablePath).FullName + "\Templates"
+        Dim files() As String = IO.Directory.GetFiles(Path, "*.tpl")
+        Dim finfo As IO.FileInfo
+        For Each item As String In files
+            finfo = New IO.FileInfo(item)
+            Dim tplName As String = finfo.Name.Substring(0, finfo.Name.Length - finfo.Extension.Length)
+            Dim I As Integer = Me.tscbGeneratedTextLanguage.Items.Add(tplName)
+            If tplName = My.Settings.SelectedTemplateEngine Then
+                Me.tscbGeneratedTextLanguage.SelectedIndex = I
+            End If
+        Next
+        If Me.tscbGeneratedTextLanguage.SelectedIndex < 0 Then
+            Me.tscbGeneratedTextLanguage.SelectedIndex = 0
+        End If
+        isLoading = False
+    End Sub
+
+    Sub TscbGeneratedTextLanguageTextChanged(sender As Object, e As EventArgs) Handles tscbGeneratedTextLanguage.TextChanged
+        Call TabControl1SelectedIndexChanged(sender, e)
+    End Sub
+
+    Sub ToolStripButton3Click(sender As Object, e As EventArgs) Handles toolStripButton3.Click
+        Me.objDataItem.Clear()
+        Me.propertyGrid1.Update()
+        Me.propertyGrid1.Refresh()
+    End Sub
+
+    Public Sub RegenerateContent()
+        Me.PBar.ToDo.Text = "Regenerating content..."
+        Me.textBox1.Text = ""
+        Me.textBox1.Text = ParseTemplate(IO.Directory.GetParent(Application.ExecutablePath).FullName + "\Templates\" + Me.tscbGeneratedTextLanguage.Text + ".tpl")
+        My.Settings.SelectedTemplateEngine = Me.tscbGeneratedTextLanguage.Text
+    End Sub
+
+    Public ReadOnly Property GeneratedContent() As String
+        Get
+            Return Me.textBox1.Text
+        End Get
+    End Property
+
+    Sub TabControl1SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl1.SelectedIndexChanged
+        If Me.tabControl1.SelectedIndex = 1 Then
+            Me.PBar.ToDo.Add(New Expansible.Delegates.TodoAction(AddressOf Me.RegenerateContent))
+            Me.PBar.ToDo.Start()
+            'Me.RegenerateContent()
+        End If
+        Me.toolStripButton3.Enabled = (Me.tabControl1.SelectedIndex = 0)
+    End Sub
+
+    Sub ToolStripButton2Click(sender As Object, e As EventArgs) Handles toolStripButton2.Click
+        If Me.objDataItem.WikipediaProfileLink Is Nothing Then
+            MessageBox.Show("You must specify Wikipedia profile url first!")
+            Exit Sub
+        End If
+
+        With Me.PBar.ToDo
+            .AddAllActions(New Import.FromWikipediaURL())
+            .AddAllActions(New Import.FromAniDBURL())
+            .AddAllActions(New Import.FromAnimeNewsNetworkURL())
+            .AddAllActions(New Import.FromIMDBURL())
+            .AddAllActions(New Import.FromTVcomURL())
+        End With
+
+        Me.PBar.ToDo.Start()
+    End Sub
+
+    Sub ToolStripButton4Click(sender As Object, e As EventArgs) Handles toolStripButton4.Click
+        If Not Me.tabControl1.SelectedIndex = 1 Then
+            Me.tabControl1.SelectedIndex = 1
+        End If
+        Clipboard.SetText(Me.textBox1.Text)
+    End Sub
+
+    Sub ToolStripButton1Click(sender As Object, e As EventArgs) Handles toolStripButton1.Click
+        SheetFillWizard.Instance.Show()
+    End Sub
+
+    Sub ToolStripButton5Click(sender As Object, e As EventArgs) Handles toolStripButton5.Click
+        Dim ab As New About()
+        ab.ShowDialog()
+    End Sub
+
+    Sub ToolStripButton6Click(sender As Object, e As EventArgs) Handles toolStripButton6.Click
+        Dim cf As New Config(Me)
+        cf.ShowDialog()
+    End Sub
+
+    Sub MainFormActivated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        If Me.PBar.Visible Then
+            Me.PBar.Focus()
+            Exit Sub
+        End If
+        If SheetFillWizard.Instance.Visible Then
+            SheetFillWizard.Instance.Focus()
+            Exit Sub
+        End If
+    End Sub
+
+    Sub TscbGeneratedTextLanguageSelectedIndexChanged(sender As Object, e As EventArgs) Handles tscbGeneratedTextLanguage.SelectedIndexChanged
+        If isLoading Then Exit Sub
+        Me.PBar.ToDo.Add(New Expansible.Delegates.TodoAction(AddressOf Me.RegenerateContent))
+        Me.PBar.ToDo.Start()
+    End Sub
+
 End Class

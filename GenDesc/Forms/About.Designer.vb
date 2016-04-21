@@ -33,37 +33,39 @@ Partial Class About
 	''' not be able to load this method if it was changed manually.
 	''' </summary>
 	Private Sub InitializeComponent()
-		Me.webBrowser1 = New System.Windows.Forms.WebBrowser
-		Me.SuspendLayout
-		'
-		'webBrowser1
-		'
-		Me.webBrowser1.AllowNavigation = false
-		Me.webBrowser1.AllowWebBrowserDrop = false
-		Me.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.webBrowser1.IsWebBrowserContextMenuEnabled = false
-		Me.webBrowser1.Location = New System.Drawing.Point(0, 0)
-		Me.webBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
-		Me.webBrowser1.Name = "webBrowser1"
-		Me.webBrowser1.ScriptErrorsSuppressed = true
-		Me.webBrowser1.Size = New System.Drawing.Size(399, 259)
-		Me.webBrowser1.TabIndex = 0
-		Me.webBrowser1.WebBrowserShortcutsEnabled = false
-		'
-		'About
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(399, 259)
-		Me.Controls.Add(Me.webBrowser1)
-		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-		Me.MaximizeBox = false
-		Me.MinimizeBox = false
-		Me.Name = "About"
-		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-		Me.Text = "About"
-		AddHandler Load, AddressOf Me.AboutLoad
-		Me.ResumeLayout(false)
-	End Sub
-	Private webBrowser1 As System.Windows.Forms.WebBrowser
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(About))
+        Me.webBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.SuspendLayout()
+        '
+        'webBrowser1
+        '
+        Me.webBrowser1.AllowNavigation = False
+        Me.webBrowser1.AllowWebBrowserDrop = False
+        Me.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.webBrowser1.IsWebBrowserContextMenuEnabled = False
+        Me.webBrowser1.Location = New System.Drawing.Point(0, 0)
+        Me.webBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webBrowser1.Name = "webBrowser1"
+        Me.webBrowser1.ScriptErrorsSuppressed = True
+        Me.webBrowser1.Size = New System.Drawing.Size(399, 259)
+        Me.webBrowser1.TabIndex = 0
+        Me.webBrowser1.WebBrowserShortcutsEnabled = False
+        '
+        'About
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(399, 259)
+        Me.Controls.Add(Me.webBrowser1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "About"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "About"
+        Me.ResumeLayout(False)
+
+    End Sub
+    Private webBrowser1 As System.Windows.Forms.WebBrowser
 End Class

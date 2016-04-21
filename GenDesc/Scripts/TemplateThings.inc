@@ -1,5 +1,5 @@
 ﻿<%@ Assembly Name="System.Windows.Forms" %>
-<%@ Assembly Name="GenDescTV" %>
+<%@ Assembly Name="GenDesc.NET" %>
 <%@ Import NameSpace="System.Windows.Forms" %>
 <%@ Import NameSpace="GenDesc" %>
 <script runat="template">

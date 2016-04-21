@@ -172,39 +172,39 @@ Public Class WebBrowserContentDonwloader
 		Loop While DateTime.Now.Ticks > (t.Ticks + SpecialTimers.Item(name))
 		SpecialTimers.Remove(name)		
 	End Sub
-		
-	Public Function DownloadWikipediaString(Uri As String, Optional UseRedirects as Boolean = true) As String
-		Dim Rez as String ="" 
-		Dim webRequest As System.Net.HttpWebRequest = DirectCast(System.Net.WebRequest.Create(New Uri(uri)), HttpWebRequest)		
-		webRequest.Credentials = System.Net.CredentialCache.DefaultCredentials
-		webRequest.Accept = "text/xml"
-		Try  
-    		Dim webResponse As System.Net.HttpWebResponse = DirectCast(webRequest.GetResponse(), HttpWebResponse)    
-    		Dim responseStream As System.IO.Stream = webResponse.GetResponseStream()
-    		Dim reader As System.Xml.XmlReader = New XmlTextReader(responseStream)
-    		Dim NS As String = "http://www.mediawiki.org/xml/export-0.3/"
-    		Dim doc As New XPathDocument(reader)
-    		reader.Close()
-    		webResponse.Close()    
-    		Dim myXPahtNavigator As XPathNavigator = doc.CreateNavigator()
-		    Dim nodesText As XPathNodeIterator = myXPahtNavigator.SelectDescendants("text", NS, False)
-		    While nodesText.MoveNext()
-                rez = nodesText.Current.InnerXml & " "
-    		End While
-		Catch ex As Exception
-			rez = ex.ToString()   
-		End Try		
-		If UseRedirects Then
-			Dim rstring as String = Me.GetWikipediaStringForRedirect(rez)
-			If rstring <> "" Then
-				rez = Me.DownloadWikipediaString(GetWikipediaExportURL(rstring))
-			End If
-		End If
-		Return rez		
-	End Function
-	
-	
-	Public Function GetAniDBRating(AnimeId As Integer) As AniDBRating
+
+    Public Function DownloadWikipediaString(Uri As String, Optional UseRedirects As Boolean = True) As String
+        Dim Rez As String = ""
+        Dim webRequest As System.Net.HttpWebRequest = DirectCast(System.Net.WebRequest.Create(New Uri(Uri)), HttpWebRequest)
+        webRequest.Credentials = System.Net.CredentialCache.DefaultCredentials
+        webRequest.Accept = "text/xml"
+        Try
+            Dim webResponse As System.Net.HttpWebResponse = DirectCast(webRequest.GetResponse(), HttpWebResponse)
+            Dim responseStream As System.IO.Stream = webResponse.GetResponseStream()
+            Dim reader As System.Xml.XmlReader = New XmlTextReader(responseStream)
+            Dim NS As String = "http://www.mediawiki.org/xml/export-0.10/"
+            Dim doc As New XPathDocument(reader)
+            reader.Close()
+            webResponse.Close()
+            Dim myXPahtNavigator As XPathNavigator = doc.CreateNavigator()
+            Dim nodesText As XPathNodeIterator = myXPahtNavigator.SelectDescendants("text", NS, False)
+            While nodesText.MoveNext()
+                Rez = nodesText.Current.InnerXml & " "
+            End While
+        Catch ex As Exception
+            Rez = ex.ToString()
+        End Try
+        If UseRedirects Then
+            Dim rstring As String = Me.GetWikipediaStringForRedirect(Rez)
+            If rstring <> "" Then
+                Rez = Me.DownloadWikipediaString(GetWikipediaExportURL(rstring))
+            End If
+        End If
+        Return Rez
+    End Function
+
+
+    Public Function GetAniDBRating(AnimeId As Integer) As AniDBRating
 		Dim rez As New AniDBRating()
 		Dim ratings_content As String = Me.DownloadWebDocument("http://anidb.net/perl-bin/animedb.pl?show=animevotes&aid=" + AnimeId.ToString())
 		Dim reviews_content As String = Me.DownloadWebDocument("http://anidb.net/perl-bin/animedb.pl?show=animeatt&aid=" + AnimeId.ToString())

@@ -3,13 +3,13 @@ Namespace VideoTools.ffmpeg
 Public Class Tools
 	
 	Private CommandLine As String = my.Settings.FFMPEG
-	
-	Private Sub Execute(ByRef CommandLineArgs As ffmpeg.CommandLineArguments)		
-		Dim rez As String = Library.Console.RunApplicationSE(Me.CommandLine, CommandLineArgs.ToString())
-		'Messagebox.Show(rez)
-	End Sub	
-	
-	Public Sub ExtractFrame(InFileName As String, OutFileName As String, Optional Seconds As Integer = 0)
+
+        Private Function Execute(ByRef CommandLineArgs As ffmpeg.CommandLineArguments) As String
+            Dim rez As String = Library.Console.RunApplicationSE(Me.CommandLine, CommandLineArgs.ToString())
+            Return rez
+        End Function
+
+        Public Sub ExtractFrame(InFileName As String, OutFileName As String, Optional Seconds As Integer = 0)
 		Me.ExtractFrame(InFileName, OutFileName, New TimeSpan(0, 0, Seconds))
 	End Sub	
 	
@@ -52,10 +52,10 @@ Public Class Tools
 		Dim DurationHours As Integer, DurationMinutes As Integer, DurationSeconds As Integer, DurationMiliseconds As Integer
 		Dim StartingPosition As Double, Bitrate As Integer, BitrateMode As String
 		Dim cml As New ffmpeg.CommandLineArguments()
-		cml.InputFile(FileName)		
-		cml.Version()		
-		Dim out As String = Library.Console.RunApplicationSE(Me.CommandLine, cml.ToString())
-		Dim m As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(out, "Duration:\s+(\d+):(\d+):(\d+).(\d*),\s+start:\s+([^\s,]+),\s+bitrate:\s+(\d+)\s+([^/]+)")
+		cml.InputFile(FileName)
+            '	cml.Version()
+            Dim out As String = Execute(cml)
+            Dim m As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(out, "Duration:\s+(\d+):(\d+):(\d+).(\d*),\s+start:\s+([^\s,]+),\s+bitrate:\s+(\d+)\s+([^/]+)")
 		If m.Success Then
 			 DurationHours = val(m.Groups.Item(1).Value)
 			 DurationMinutes = val(m.Groups.Item(2).Value)
@@ -176,8 +176,8 @@ Public Class Tools
 		cla.SpecifyFormat("image2")
 		cla.OutFileName(tFileName)
 		IO.Directory.CreateDirectory(tmpPath)
-		Dim out As String = Library.Console.RunApplicationSE(Me.CommandLine, cla.ToString())
-		For I As Integer = 0 To HowMany - 1
+            Dim out As String = Execute(cla)
+            For I As Integer = 0 To HowMany - 1
 			Dim fname as String = tmpPath + "\" + (I + 1).ToString() + ".png"
 			Me.WaitUntilFileExist(fname)
 			rez(i) = System.Drawing.Image.FromFile(fname)

@@ -17,16 +17,12 @@
 '          Thanks to vijay.santhanam@gmail.com
 '   --------------------------------------------------------------- 
 
-Imports System
 Imports System.CodeDom.Compiler
-Imports System.Collections
-Imports System.Collections.Generic
 Imports System.IO
 Imports System.Reflection
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports Microsoft.CSharp
-Imports System.Globalization
 
 
 Namespace TemplateMaschine
@@ -515,18 +511,9 @@ Namespace TemplateMaschine
                         End If
                         Dim fileName As String = match.Groups("fileName").Value
                         Dim resourceNames As String() = assembly.GetManifestResourceNames()
-                        Dim resourceName As String = Array.Find(Of String)(resourceNames, Function(ByVal fn As String) fn.EndsWith(fileName))
-                        'string resourceName = null;
-'                        foreach (string resName in resourceNames)
-'                        {
-'                            if (resName.EndsWith(fileName))
-'                            {
-'                                resourceName = resName;
-'                                break;
-'                            }
-'                        }
-                        
-                        If resourceName Is Nothing Then
+                        Dim resourceName As String = Array.Find(Of String)(resourceNames, Function(ByVal fn As String) fn.EndsWith(fileName))
+
+                        If resourceName Is Nothing Then
                             Throw New FileNotFoundException("Included file '" & fileName & "' not found in resource.")
                         End If
                         
@@ -636,9 +623,9 @@ Namespace TemplateMaschine
                 For Each CompErr As CompilerError In results.Errors
                     errs += (((("Template: " & CompErr.FileName) + Environment.NewLine & "Line number: ") + CompErr.Line.ToString() + Environment.NewLine & "Error: ") + CompErr.ErrorNumber & " '") + CompErr.ErrorText & "'"
                     Dim line As String = GetLine(sourceStringOriginal, CompErr.Line)
-                    Dim message as String = "Error compiling template: " + Environment.NewLine + errs + Environment.NewLine + "Line: '" + line.ToString() + "'"
-                    Throw New TemplateCompilerException(message)
-                Next               
+                    Dim message As String = "Error compiling template: " + Environment.NewLine + errs + Environment.NewLine + "Line: '" + line.ToString() + "'"
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Next               
             Else
                 Dim generatorAssembly As Assembly = results.CompiledAssembly
                 generatorObject = generatorAssembly.CreateInstance("TempGenerator.TempGeneratorClass", False, System.Reflection.BindingFlags.CreateInstance, Nothing, Nothing, Nothing, _
@@ -712,11 +699,12 @@ Namespace TemplateMaschine
         ''' <param name="outputToString">Flag if output should be written to a string</param>
         ''' <returns>Result of processed template, if outputToString is set to true</returns>
         Public Function Generate(ByVal args As Object(), ByVal outputFile As String, ByVal outputToString As Boolean) As String
-            If generatorObject Is Nothing Then
-                Throw New ApplicationException("please load a template first")
-            End If
-            
-            Try
+            If generatorObject Is Nothing Then
+                ' Throw New ApplicationException("please load a template first")
+                Return ""
+            End If
+
+            Try
                 generatorObject.[GetType]().InvokeMember("SetOutput", BindingFlags.Instance Or BindingFlags.[Public] Or BindingFlags.InvokeMethod, Nothing, generatorObject, New Object() {outputFile, outputToString})
                 Dim str As Object = generatorObject.[GetType]().InvokeMember("Generate", BindingFlags.Instance Or BindingFlags.[Public] Or BindingFlags.InvokeMethod, Nothing, generatorObject, New Object() {args})
                 If str Is Nothing Then

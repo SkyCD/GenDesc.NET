@@ -110,8 +110,8 @@ Public Class ObjDataItem
 	Private _ANNLink As Uri
 	Private _OtherLinks As Collections.Generic.List(Of OtherLink)	
 	Private _Youtube As String()
-	Private _TrumbnailsURL As Uri
-	Private _aka As String()
+    Private _TrumbnailsURL As String
+    Private _aka As String()
 	Private _WhatIThink As String
 	Private _OtherOpinions As Collections.Generic.List(Of Opinion)	
 	Private _IMDBrating As Double
@@ -238,18 +238,18 @@ Public Class ObjDataItem
 			Me._aka = value 				
 		End Set
 	End Property
-	
-	<Category("Images")> _
-	Public Property ThumbnailURL As uri
-		Get
-			Return Me._TrumbnailsURL			
-		End Get
-		Set (value As uri)
-			Me._TrumbnailsURL = value 				
-		End Set
-	End Property
 
-	<Category("Media")> _
+    <Category("Images")>
+    Public Property ThumbnailURL As String
+        Get
+            Return Me._TrumbnailsURL
+        End Get
+        Set(value As String)
+            Me._TrumbnailsURL = value
+        End Set
+    End Property
+
+    <Category("Media")> _
 	Public Property YoutubeEmbededCodes As String()
 		Get
 			Return Me._Youtube			

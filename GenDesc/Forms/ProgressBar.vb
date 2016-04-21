@@ -21,12 +21,12 @@ Public Partial Class ProgressBar
 		'
 		Me.ToDo = New Expansible.ProcessSystem(Me, MainForm)		
 	End Sub
-	
-	Sub ProgressBarLoad(sender As Object, e As EventArgs)
-		
-	End Sub
-	
-	Public Overrides Property Text As String		
+
+    Sub ProgressBarLoad(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Public Overrides Property Text As String		
 		Get
 			On Error Resume Next			
 			Return Me.lblDescription.Text

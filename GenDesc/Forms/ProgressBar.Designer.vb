@@ -33,63 +33,89 @@ Partial Class ProgressBar
 	''' not be able to load this method if it was changed manually.
 	''' </summary>
 	Private Sub InitializeComponent()
-		Me.lblDescription = New System.Windows.Forms.Label
-		Me.pbBar = New System.Windows.Forms.ProgressBar
-		Me.label1 = New System.Windows.Forms.Label
-		Me.SuspendLayout
-		'
-		'lblDescription
-		'
-		Me.lblDescription.AutoSize = true
-		Me.lblDescription.Location = New System.Drawing.Point(12, 9)
-		Me.lblDescription.Name = "lblDescription"
-		Me.lblDescription.Size = New System.Drawing.Size(35, 13)
-		Me.lblDescription.TabIndex = 0
-		Me.lblDescription.Text = "label1"
-		'
-		'pbBar
-		'
-		Me.pbBar.Location = New System.Drawing.Point(12, 37)
-		Me.pbBar.Name = "pbBar"
-		Me.pbBar.Size = New System.Drawing.Size(424, 22)
-		Me.pbBar.TabIndex = 1
-		'
-		'label1
-		'
-		Me.label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-						Or System.Windows.Forms.AnchorStyles.Left)  _
-						Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-		Me.label1.AutoSize = true
-		Me.label1.BackColor = System.Drawing.Color.Transparent
-		Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(186,Byte))
-		Me.label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(60,Byte),Integer), CType(CType(60,Byte),Integer), CType(CType(60,Byte),Integer))
-		Me.label1.Location = New System.Drawing.Point(442, 42)
-		Me.label1.Name = "label1"
-		Me.label1.Size = New System.Drawing.Size(27, 13)
-		Me.label1.TabIndex = 2
-		Me.label1.Text = "0 %"
-		Me.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'ProgressBar
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(505, 87)
-		Me.ControlBox = false
-		Me.Controls.Add(Me.label1)
-		Me.Controls.Add(Me.pbBar)
-		Me.Controls.Add(Me.lblDescription)
-		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-		Me.MaximumSize = New System.Drawing.Size(507, 89)
-		Me.MinimumSize = New System.Drawing.Size(507, 89)
-		Me.Name = "ProgressBar"
-		Me.ShowInTaskbar = false
-		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-		AddHandler Load, AddressOf Me.ProgressBarLoad
-		Me.ResumeLayout(false)
-		Me.PerformLayout
-	End Sub
-	Private label1 As System.Windows.Forms.Label
-	Private pbBar As System.Windows.Forms.ProgressBar
-	Private lblDescription As System.Windows.Forms.Label
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProgressBar))
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.label1 = New System.Windows.Forms.Label()
+        Me.TabledLayout = New System.Windows.Forms.TableLayoutPanel()
+        Me.pbBar = New System.Windows.Forms.ProgressBar()
+        Me.TabledLayout.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'lblDescription
+        '
+        Me.lblDescription.AutoEllipsis = True
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblDescription.Location = New System.Drawing.Point(3, 3)
+        Me.lblDescription.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(477, 22)
+        Me.lblDescription.TabIndex = 0
+        Me.lblDescription.Text = "label1"
+        '
+        'label1
+        '
+        Me.label1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.label1.AutoSize = True
+        Me.label1.BackColor = System.Drawing.Color.Transparent
+        Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(186, Byte))
+        Me.label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.label1.Location = New System.Drawing.Point(486, 25)
+        Me.label1.Name = "label1"
+        Me.label1.Size = New System.Drawing.Size(75, 25)
+        Me.label1.TabIndex = 2
+        Me.label1.Text = "0 %"
+        Me.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TabledLayout
+        '
+        Me.TabledLayout.ColumnCount = 2
+        Me.TabledLayout.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.72653!))
+        Me.TabledLayout.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.27347!))
+        Me.TabledLayout.Controls.Add(Me.pbBar, 0, 1)
+        Me.TabledLayout.Controls.Add(Me.label1, 1, 1)
+        Me.TabledLayout.Controls.Add(Me.lblDescription, 0, 0)
+        Me.TabledLayout.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabledLayout.Location = New System.Drawing.Point(0, 0)
+        Me.TabledLayout.Name = "TabledLayout"
+        Me.TabledLayout.RowCount = 2
+        Me.TabledLayout.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TabledLayout.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TabledLayout.Size = New System.Drawing.Size(564, 50)
+        Me.TabledLayout.TabIndex = 3
+        '
+        'pbBar
+        '
+        Me.pbBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pbBar.Location = New System.Drawing.Point(3, 28)
+        Me.pbBar.Name = "pbBar"
+        Me.pbBar.Size = New System.Drawing.Size(477, 19)
+        Me.pbBar.TabIndex = 2
+        '
+        'ProgressBar
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(564, 50)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.TabledLayout)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "ProgressBar"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.TabledLayout.ResumeLayout(False)
+        Me.TabledLayout.PerformLayout()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Private label1 As System.Windows.Forms.Label
+    Private lblDescription As System.Windows.Forms.Label
+    Friend WithEvents TabledLayout As TableLayoutPanel
+    Private WithEvents pbBar As Windows.Forms.ProgressBar
 End Class
