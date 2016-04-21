@@ -1,0 +1,6 @@
+/.vs
+/UpgradeLog.htm
+/GenDesc/Tools/*
+/GenDesc/obj/*
+/Backup/
+Inno Setup/setup.exe
