@@ -44,7 +44,7 @@ Source: "..\GenDesc\bin\Release\GenDesc.NET.vshost.exe.manifest"; DestDir: "{app
 Source: "..\GenDesc\bin\Release\Jayrock.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GenDesc\bin\Release\Jayrock.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\GenDesc\bin\Release\WizardBase.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\GenDesc\bin\Release\system.inc"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\GenDesc\bin\Release\system.inc"; DestDir: "{app}"; Flags: ignoreversion; Permissions: everyone-full
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "ExtApps\dotNetFx40_Full_setup.exe"; DestDir: "{app}\Libraries"
 Source: "ExtApps\ffmpeg-20160418-git-13406b6-win32-static\*"; DestDir: "{app}\Tools\FFMPEG"; Flags: ignoreversion createallsubdirs recursesubdirs
