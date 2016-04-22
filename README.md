@@ -2,3 +2,5 @@
 # GenDesc.NET
 
 Is a GUI tool for generating descriptions for files.
+
+![Screenshot](http://bit.ly/GenDescNET-latest-screenshot)
